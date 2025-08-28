@@ -28,7 +28,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 SECRET_KEY = 'django-insecure-bym=02q5yh03jq=^^f%7!pv2$e600scqk)nd*bxa$w-5^i74#4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['yourusername.pythonanywhere.com']
 
@@ -91,8 +91,6 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
-
 
 
 # Password validation
