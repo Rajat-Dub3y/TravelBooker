@@ -8,6 +8,12 @@ __pycache__/
 *.pyd
 .Python
 
+# Cover nested folders
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
 # Virtualenv
 venv/
 myenv/
