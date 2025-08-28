@@ -7,12 +7,13 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
+staticfiles/
 
 # Cover nested folders
-**/__pycache__/
-**/*.pyc
-**/*.pyo
-**/*.pyd
+*/__pycache__/
+*/*.pyc
+*/*.pyo
+*/*.pyd
 
 # Virtualenv
 venv/
