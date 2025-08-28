@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="hero-section text-center py-5 mb-5">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-4">Find your next adventure</h1>
+        <p class="lead mb-4">Book your bus, train, or flight tickets easily and quickly!</p>
+
+        <form method="get" action="{% url 'Booking:travel_list' %}" class="d-flex justify-content-center">
+            <div class="row g-2 justify-content-center w-100">
+                <div class="col-12 col-md-3">
+                    <input type="text" name="source" placeholder="Source" class="form-control rounded-pill">
+                </div>
+                <div class="col-12 col-md-3">
+                    <input type="text" name="destination" placeholder="Destination" class="form-control rounded-pill">
+                </div>
+                <div class="col-12 col-md-2">
+                    <input type="date" name="start_date" class="form-control rounded-pill">
+                </div>
+                <div class="col-12 col-md-2">
+                    <select name="type" class="form-select rounded-pill">
+                        <option value="">Any Type</option>
+                        <option value="Bus">Bus</option>
+                        <option value="Train">Train</option>
+                        <option value="Flight">Flight</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-2">
+                    <button type="submit" class="btn btn-light rounded-pill w-100 fw-bold">
+                        <i class="fas fa-search me-1"></i> Search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<div class="container">
+    <h2 class="mb-4 text-center">Featured Travel Options</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for travel in travels %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-{{ travel.type|lower|default:"route" }} me-2"></i>
+                            {{ travel.type }}
+                        </h5>
+                        <h4 class="text-primary fw-bold mb-0">₹{{ travel.price }}</h4>
+                    </div>
+                    <hr>
+                    <p class="card-text mb-1">
+                        <i class="fas fa-map-marker-alt me-2 text-muted"></i>
+                        <strong class="text-dark">{{ travel.source }} → {{ travel.destination }}</strong>
+                    </p>
+                    <p class="card-text">
+                        <i class="fas fa-calendar-alt me-2 text-muted"></i>
+                        {{ travel.date_time|date:"d M Y" }} at {{ travel.date_time|date:"H:i" }}
+                    </p>
+                </div>
+                <div class="card-footer bg-white border-0 pt-0 text-center">
+                    <a href="{% url 'Booking:travel_detail' travel.pk %}" class="btn btn-primary rounded-pill w-75">Book Now</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No travel options found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

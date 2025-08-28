@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Available Travel Options</h2>
+
+    <!-- Filter Form -->
+    <form method="get">
+        <input type="text" name="source" placeholder="Source" value="{{ filters.source|default:'' }}">
+        <input type="text" name="destination" placeholder="Destination" value="{{ filters.destination|default:'' }}">
+        <input type="date" name="date" value="{{ filters.date|default:'' }}">
+        <input type="number" name="min_price" placeholder="Min Price" value="{{ filters.min_price|default:'' }}">
+        <input type="number" name="max_price" placeholder="Max Price" value="{{ filters.max_price|default:'' }}">
+        <select name="type">
+            <option value="">Any</option>
+            <option value="Bus" {% if filters.type == 'Bus' %}selected{% endif %}>Bus</option>
+            <option value="Train" {% if filters.type == 'Train' %}selected{% endif %}>Train</option>
+            <option value="Flight" {% if filters.type == 'Flight' %}selected{% endif %}>Flight</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+
+
+    <!-- Recommended Section -->
+    {% if recommended %}
+        <h4>Recommended Travel Options</h4>
+        <div class="row mb-4">
+            {% for travel in recommended %}
+                <div class="col-md-3 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ travel.type }}: {{ travel.source }} → {{ travel.destination }}</h5>
+                            <p class="card-text">
+                                Date & Time: {{ travel.date_time }}<br>
+                                Price: ₹{{ travel.price }}<br>
+                                Seats Available: {{ travel.available_seats }}
+                            </p>
+                            <a href="{% url 'booking:travel_detail' travel.pk %}" class="btn btn-sm btn-success">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- All Travels Table -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Date & Time</th>
+                <th>Price</th>
+                <th>Seats</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for travel in travels %}
+                <tr>
+                    <td>{{ travel.type }}</td>
+                    <td>{{ travel.source }}</td>
+                    <td>{{ travel.destination }}</td>
+                    <td>{{ travel.date_time }}</td>
+                    <td>₹{{ travel.price }}</td>
+                    <td>{{ travel.available_seats }}</td>
+                    <td><a href="{% url 'Booking:travel_detail' travel.pk %}" class="btn btn-sm btn-primary">View</a></td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center">No travel options found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+

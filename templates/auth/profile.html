@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container" style="max-width:500px; margin-top:50px;">
+    <h2>Update Profile</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="{% url 'auth:change_password' %}" class="btn btn-warning mt-3">Change Password</a>
+    </form>
+</div>
+{% endblock %}

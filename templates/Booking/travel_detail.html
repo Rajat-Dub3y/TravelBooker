@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm rounded-3">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-4">
+                        <h2 class="card-title fw-bold">
+                            <i class="fas fa-{{ travel.type|lower|default:"route" }} me-2"></i>
+                            {{ travel.source }} → {{ travel.destination }}
+                        </h2>
+                        <h2 class="text-primary fw-bold">
+                            ₹{{ travel.price }}
+                        </h2>
+                    </div>
+
+                    <ul class="list-group list-group-flush mb-4">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-muted">Date & Time:</span>
+                            <span><i class="fas fa-calendar-alt me-2 text-primary"></i>{{ travel.date_time|date:"F j, Y, P" }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-muted">Seats Available:</span>
+                            <span><i class="fas fa-couch me-2 text-primary"></i>{{ travel.available_seats }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-muted">Travel Type:</span>
+                            <span><i class="fas fa-{{ travel.type|lower|default:"route" }} me-2 text-primary"></i>{{ travel.type }}</span>
+                        </li>
+                    </ul>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'Booking:book_travel' travel.pk %}" class="btn btn-primary btn-lg rounded-pill px-4 me-md-2">
+                            <i class="fas fa-ticket-alt me-2"></i>Book Now
+                        </a>
+                        <a href="{% url 'Booking:travel_list' %}" class="btn btn-outline-secondary btn-lg rounded-pill px-4">
+                            <i class="fas fa-arrow-left me-2"></i>Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
