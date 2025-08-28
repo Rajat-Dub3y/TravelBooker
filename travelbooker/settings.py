@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-bym=02q5yh03jq=^^f%7!pv2$e600scqk)nd*bxa$w-5^i74#4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['yourusername.pythonanywhere.com']
 
 
 # Application definition
@@ -80,16 +80,19 @@ WSGI_APPLICATION = 'travelbooker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.getenv("DB_NAME", "travelbooker"),
-        "USER": os.getenv("DB_USER", "root"),
-        "PASSWORD": os.getenv("DB_PASSWORD", ""),
-        "HOST": os.getenv("DB_HOST", "localhost"),
-        "PORT": os.getenv("DB_PORT", "3306"),
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'yourusername$yourdbname',
+        'USER': 'yourusername',
+        'PASSWORD': 'yourpassword',
+        'HOST': 'yourusername.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     }
 }
+
+
 
 
 # Password validation
